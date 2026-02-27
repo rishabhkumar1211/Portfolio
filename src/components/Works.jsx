@@ -24,43 +24,52 @@ const ProjectCard = ({
           scale: 1,
           speed: 450,
         }}
-        className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
+        className="bg-black-100 rounded-2xl w-full sm:w-[360px] overflow-hidden border border-accent/20 hover:border-accent/60 transition-all duration-300 shadow-lg hover:shadow-accent/20"
       >
-        <div className="relative w-full h-[230px]">
+        <div className="relative w-full h-[200px] sm:h-[230px] overflow-hidden group">
           <img
             src={image}
             alt="project_image"
-            className="w-full h-full object-cover rounded-2xl"
+            loading="lazy"
+            className="w-full h-full object-cover rounded-t-2xl group-hover:scale-110 transition-transform duration-300"
           />
 
-          <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
-            <div
-              onClick={() => window.open(source_code_link, "_blank")}
-              className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
+          <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 rounded-t-2xl">
+            <a
+              href={source_code_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 sm:px-6 py-2 bg-accent text-white font-bold rounded-lg hover:bg-accent-light transition flex items-center gap-2 text-sm sm:text-base"
             >
               <img
                 src={github}
                 alt="source code"
-                className="w-1/2 h-1/2 object-contain"
+                loading="lazy"
+                className="w-4 sm:w-5 h-4 sm:h-5 object-contain invert"
               />
-            </div>
+              View Code
+            </a>
           </div>
         </div>
 
-        <div className="mt-5">
-          <h3 className="text-white font-bold text-[24px]">{name}</h3>
-          <p className="mt-2 text-secondary text-[14px]">{description}</p>
-        </div>
+        <div className="p-4 sm:p-6">
+          <h3 className="text-white font-extrabold md:text-[22px] sm:text-[18px] text-[16px] truncate">
+            {name}
+          </h3>
+          <p className="mt-2 sm:mt-3 text-gray-400 md:text-[14px] sm:text-[13px] text-[12px] line-clamp-3 leading-relaxed">
+            {description}
+          </p>
 
-        <div className="mt-4 flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <p
-              key={`${name}-${tag.name}`}
-              className={`text-[14px] ${tag.color}`}
-            >
-              #{tag.name}
-            </p>
-          ))}
+          <div className="mt-4 sm:mt-5 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span
+                key={`${name}-${tag.name}`}
+                className={`md:text-[12px] sm:text-[11px] text-[10px] font-semibold px-2 sm:px-3 py-1 rounded-full ${tag.color} bg-gradient-to-r from-accent/10 to-blue-accent/10 border border-accent/30`}
+              >
+                {tag.name}
+              </span>
+            ))}
+          </div>
         </div>
       </Tilt>
     </motion.div>
@@ -71,30 +80,50 @@ const Works = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} `}>My work</p>
-        <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
+        <p className={`${styles.sectionSubText}`}>Featured Work</p>
+        <h2 className={`${styles.sectionHeadText}`}>Key Projects</h2>
       </motion.div>
 
-      <div className="w-full flex">
-        <motion.p
-          variants={fadeIn("", "", 0.1, 1)}
-          className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
-        >
-          Following projects showcases my skills and experience through
-          real-world examples of my work. Each project is briefly described with
-          links to code repositories and live demos in it. It reflects my
-          ability to solve complex problems, work with different technologies,
-          and manage projects effectively.
-        </motion.p>
-      </div>
+      <motion.div
+        variants={fadeIn("", "", 0.1, 1)}
+        className="mt-5 w-full max-w-5xl rounded-3xl border border-accent/10 bg-black-200/40 px-5 py-5 sm:px-7 sm:py-6 shadow-[0_18px_60px_rgba(15,23,42,0.9)]"
+      >
+        <p className="text-gray-300 md:text-[16px] sm:text-[14px] text-[13px] md:leading-[30px] sm:leading-[26px] leading-[22px]">
+          A curated set of projects that represent how I approach product
+          engineering: clear problem statements, pragmatic technical decisions,
+          measurable impact, and maintainable codebases. From AI‑assisted tools
+          to data‑heavy dashboards, each project highlights end‑to‑end ownership
+          across the stack.
+        </p>
+      </motion.div>
 
-      <div className="mt-20 flex flex-wrap gap-7">
-        {projects.map((project, index) => (
-          <ProjectCard key={`project-${index}`} index={index} {...project} />
-        ))}
+      <div className="mt-12 sm:mt-16 w-full">
+        <div className="rounded-3xl bg-black-200/25 border border-accent/10 p-5 sm:p-7 lg:p-9 shadow-[0_24px_80px_rgba(15,23,42,0.9)]">
+          <div className="mb-5 flex items-center justify-between gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-black-100/60 px-3 py-1 text-[11px] sm:text-[12px] text-gray-200">
+              <span className="h-2 w-2 rounded-full bg-accent" />
+              {projects.length} featured projects
+            </span>
+          </div>
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
+            {projects.length ? (
+              projects.map((project, index) => (
+                <ProjectCard
+                  key={`project-${index}`}
+                  index={index}
+                  {...project}
+                />
+              ))
+            ) : (
+              <p className="text-gray-400 text-center w-full py-8">
+                No projects available at the moment.
+              </p>
+            )}
+          </div>
+        </div>
       </div>
     </>
   );
 };
 
-export default SectionWrapper(Works, "");
+export default SectionWrapper(Works, "projects");

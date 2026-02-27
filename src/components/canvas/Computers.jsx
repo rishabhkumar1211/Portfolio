@@ -1,23 +1,52 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 
 import CanvasLoader from "../Loader";
 
+// create a DRACOLoader instance with decoder path
+const dracoLoader = new DRACOLoader().setDecoderPath("/draco/");
+
+// preload the model -- note: callback is optional here
+useGLTF.preload("/desktop_pc/scene_draco.glb");
+
 const Computers = ({ isMobile }) => {
-  const computer = useGLTF("./desktop_pc/scene.gltf");
+  const computer = useGLTF("./desktop_pc/scene_draco.glb", true, (loader) => {
+    loader.setDRACOLoader(dracoLoader);
+  });
+
+  React.useEffect(() => {
+    if (!computer || !computer.scene) return;
+    computer.scene.traverse((child) => {
+      if (
+        child.isMesh &&
+        child.geometry &&
+        child.geometry.attributes.position
+      ) {
+        const pos = child.geometry.attributes.position;
+        const array = pos.array;
+        let patched = false;
+        for (let i = 0; i < array.length; i += 3) {
+          if (isNaN(array[i]) || isNaN(array[i + 1]) || isNaN(array[i + 2])) {
+            // zero out the offending vertex
+            array[i] = array[i + 1] = array[i + 2] = 0;
+            patched = true;
+          }
+        }
+        if (patched) {
+          pos.needsUpdate = true;
+          child.geometry.computeBoundingSphere();
+          console.warn("patched NaN vertices on mesh", child.name);
+        }
+      }
+    });
+  }, [computer]);
 
   return (
     <mesh>
-      <hemisphereLight intensity={0.15} groundColor='black' />
-      <spotLight
-        position={[-20, 50, 10]}
-        angle={0.12}
-        penumbra={1}
-        intensity={1}
-        castShadow
-        shadow-mapSize={1024}
-      />
+      <hemisphereLight intensity={0.15} groundColor="black" />
+      <spotLight position={[-20, 40, 10]} angle={0.2} penumbra={0.7} intensity={0.7} />
       <pointLight intensity={1} />
       <primitive
         object={computer.scene}
@@ -55,13 +84,12 @@ const ComputersCanvas = () => {
 
   return (
     <Canvas
-      frameloop='demand'
-      shadows
-      dpr={[1, 2]}
+      frameloop="demand"
+      dpr={[1, 1.25]}
+      gl={{ antialias: false, powerPreference: "high-performance" }}
       camera={{ position: [20, 3, 5], fov: 25 }}
-      gl={{ preserveDrawingBuffer: true }}
     >
-      <Suspense fallback={<CanvasLoader />}>
+      <Suspense fallback={null}>
         <OrbitControls
           enableZoom={false}
           maxPolarAngle={Math.PI / 2}

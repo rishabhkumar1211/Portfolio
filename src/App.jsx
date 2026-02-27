@@ -1,3 +1,4 @@
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import {
@@ -8,8 +9,13 @@ import {
   Navbar,
   Tech,
   Works,
-  StarsCanvas,
+  Resume,
 } from "./components";
+
+// dynamic import of the named export from the components barrel
+const StarsCanvas = lazy(() =>
+  import("./components").then((mod) => ({ default: mod.StarsCanvas })),
+);
 
 const App = () => {
   return (
@@ -21,11 +27,14 @@ const App = () => {
         </div>
         <About />
         <Experience />
+        <Resume />
         <Tech />
         <Works />
         <div className="relative z-0">
           <Contact />
-          <StarsCanvas />
+          <Suspense fallback={null}>
+            <StarsCanvas />
+          </Suspense>
         </div>
       </div>
     </BrowserRouter>

@@ -1,4 +1,5 @@
 import logo from "./logo.svg";
+import magicedtech from "./magicedtech.svg";
 import backend from "./backend.png";
 import creator from "./creator.png";
 import mobile from "./mobile.png";
@@ -28,6 +29,8 @@ import ecomm from "./ecomm.png";
 import carsgame from "./carsgame.png";
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
+import flow from "./flow.png"; // screenshot for FlowBoard project
+import ats from "./ats.png"; // screenshot for ATS Resume project
 
 export {
   logo,
@@ -51,12 +54,15 @@ export {
   tailwind,
   typescript,
   threejs,
+  magicedtech,
   carrent,
   movies,
   ecomm,
   carsgame,
+  flow,
   jobit,
   tripguide,
+  ats,
   costa,
   selectsource,
 };

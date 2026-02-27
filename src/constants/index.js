@@ -19,8 +19,13 @@ import {
   ecomm,
   carsgame,
   threejs,
+  magicedtech,
   costa,
   selectsource,
+  flow,
+  jobit,
+  tripguide,
+  ats,
 } from "../assets";
 
 export const navLinks = [
@@ -30,7 +35,11 @@ export const navLinks = [
   },
   {
     id: "work",
-    title: "Work",
+    title: "Experience",
+  },
+  {
+    id: "resume",
+    title: "Resume",
   },
   {
     id: "contact",
@@ -40,15 +49,15 @@ export const navLinks = [
 
 const services = [
   {
-    title: "Web Developer",
+    title: "Frontend Engineer (React)",
     icon: web,
   },
   {
-    title: "React Native Developer",
+    title: "Mobile Engineer (React Native)",
     icon: mobile,
   },
   {
-    title: "Backend Developer",
+    title: "Backend Engineer (Node.js)",
     icon: backend,
   },
 ];
@@ -109,98 +118,102 @@ const technologies = [
 ];
 
 const experiences = [
+   {
+      title: "Senior Full Stack Engineer (MERN)",
+      company_name: "MagicEdtech, Noida",
+      icon: magicedtech,
+      iconBg: "#E6DEDD",
+      date: "Jan 2025 - Present",
+      points: [
+        "Spearheaded a team of 5 engineers building DataHub, an education analytics SaaS, defining MERN architecture and coding standards adopted across the organization.",
+        "Designed and implemented DataHub frontend in React/Redux with Node.js/Express APIs, handling millions of records and driving 20+ dashboards for educators.",
+        "Integrated LLM models via REST APIs to power a student retention predictor; results enabled proactive outreach and improved retention by 12%.",
+        "Developed CheckRide Pro booking platform with role‑based access, reducing pilot certification approval time by 60% using React and MongoDB backends.",
+        "Built CI/CD pipelines with GitHub Actions and Docker, slashing deployment time by 40% and eliminating manual release steps.",
+        "Guaranteed 90+ Lighthouse scores through bundle optimization, code splitting, and lazy loading; ensured Core Web Vitals compliance site‑wide.",
+        "Achieved 80%+ test coverage with Jest and React Testing Library; regression bugs dropped by 70% and release confidence increased.",
+        "Integrated Databricks data streams into React dashboards via Express endpoints, enabling real‑time analytics for stakeholders.",
+        "Delivered a high‑performance React/Next.js frontend for Al‑Jabr Laundry, boosting engagement 45% and lowering bounce rate 10%.",
+      ],
+    },
   {
-    title: "React Native Developer",
-    company_name: "Select Source International",
-    icon: selectsource,
-    iconBg: "#383E56",
-    date: "March 2022 - Jun 2022",
-    points: [
-      "Developing and maintaining web applications using React Native and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-  {
-    title: "Software Developer",
-    company_name: "Appolo Costa Cloud",
+    title: "Full Stack Developer (MERN)",
+    company_name: "Costacloud (Okhla NSIC, New Delhi)",
     icon: costa,
     iconBg: "#E6DEDD",
-    date: "Jul 2022 - Present",
+    date: "Jun 2022 - Jan 2025",
     points: [
-      "Developed and implemented a robust software solution that revolutionized the approval processes across departments, ensuring seamless coordination and reducing time-to-approval by 50%; this resulted in improved efficiency, enhanced collaboration, and accelerated project delivery timelines(Paperless Office).",
-      "Successfully created Data Management System using React.js, Material-Ui, Redux that allows users to upload, delete, download, favoriting, and sharing files and folders similar to Google Drive that reduces the real paper-work by 100% .",
-      "Collaborated with developers to design and develop a user- friendly front-end interface of RTI (Right to Information) application with an optimized user experience; boosted user engagement by 25% and reduced bounce rate by 15% .",
-      "Orchestrated the development of algorithms, API integration and flowchart with a team of 5 developers ; delivered a fully functional and scalable application that processed 50K+ data points daily with 99% accuracy .",
-      "Resolve the daily basis issue, bug or any additional feature that provided in Jira by Testing Unit which makes application bug-free and updated to the current requirement by 100% .",
+      "Led MERN‑stack development for TeamSync, a collaboration platform with real‑time chat, WebSocket‑powered notifications, and modular file management.",
+      "Implemented a paperless approval workflow using React, Node.js and MongoDB; cut approval cycle by 50% and eliminated manual processes across 4 departments.",
+      "Built a Google Drive‑style data management UI with React, Redux and Express, supporting 100+ users and removing all previous paperwork.",
+      "Created responsive RTI application with cross‑browser support, boosting engagement by 25% and lowering bounce rate by 15%.",
+      "Set up Docker‑based development environments and standardized Git/GitHub workflows, reducing new‑hire setup time to under a day.",
+      "Integrated Stripe and PayPal in a Node.js backend to handle payments, increasing transaction success by 60%.",
+      "Authored scalable ETL pipeline consuming 50k+ records/day with Node.js services and MongoDB storage; maintained 99% accuracy.",
+      "Maintained 100+ Jira tickets with zero critical production bugs, ensuring stable releases and rapid bug turnaround.",
     ],
+   
   },
+];
+
+// --- resume-specific data; fill these values using your latest resume ---
+
+// resume URL should point to a file placed in the public/ folder
+
+export const summary =
+  "Full Stack MERN Engineer with 4+ years of experience designing, building, and scaling production web applications. Strong track record delivering B2B SaaS, data‑heavy dashboards, and AI‑powered features using React, Node.js, TypeScript, and MongoDB. Experienced in leading small teams, establishing engineering best practices, and driving performance, reliability, and maintainability through testing, observability, and modern DevOps.";
+
+export const education = [
+  {
+    degree: "B.Tech in Information Technology",
+    institution: "Guru Gobind Singh Indraprastha University, New Delhi",
+    year: "2018 – 2022",
+    details:
+      "Graduated 2022; coursework included software engineering, data structures, and web development.",
+  },
+];
+
+export const achievements = [
+  "Young Frontend Developer of the Month (Jun–Aug 2022): Recognized for outstanding React.js and Material-UI design skills within 3 months of joining Costacloud.",
+  "Launched ATS Resume Optimizer and AI Interview Coach — a production AI tool integrating Groq/Llama 3.1, helping job seekers boost ATS match rates from 30% to 80%+.",
 ];
 
 const projects = [
   {
-    name: "MOVIESVERSE",
+    name: "ATS Resume Optimizer & AI Interview Coach",
     description:
-      "A simple web app made with REACT to search any movie and Web/TV show. Technology used are react.js , material-ui, tmdb-api for all data related queries,redux-toolkit, redux-toolkit-query.",
+      "AI-powered resume and interview platform built with React, Vite, Tailwind CSS, and Groq API (Llama 3.1). Provides ATS scoring, keyword gap analysis, multi-format parsing, adaptive interview questions with real-time feedback, and DOCX export, helping users increase ATS match rates from ~30% to 80%+.",
     tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "material-ui",
-        color: "green-text-gradient",
-      },
-      {
-        name: "redux",
-        color: "pink-text-gradient",
-      },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "ai", color: "pink-text-gradient" },
+      { name: "vite", color: "green-text-gradient" },
+    ],
+    image: ats,
+    source_code_link: "https://github.com/rishabhkumar1211/Ai-resume",
+  },
+  {
+    name: "Moviesverse",
+    description:
+      "React and Redux Toolkit SPA consuming the TMDB API (500K+ titles) for real-time movie and TV search. Uses RTK Query for normalized caching, pagination, and request deduplication, consistently achieving sub‑second search and details views.",
+    tags: [
+      { name: "react", color: "blue-text-gradient" },
+      { name: "redux", color: "pink-text-gradient" },
+      { name: "rtk-query", color: "green-text-gradient" },
     ],
     image: movies,
     source_code_link: "https://github.com/rishabhkumar1211/MOVIESVERSE",
   },
   {
-    name: "Two Cars-MASTER GAME",
+    name: "FlowBoard (Jira Clone)",
     description:
-      "Utilize HTML, CSS and JavaScript to create a interactive game, featuring two cars and challenging obstacles ; increased user engagement and retention by 40% through immersive gameplay mechanics.",
+      "Kanban-style project management tool with task tracking, bug management, sprint planning, and drag-and-drop boards. Built with React and Redux, enabling teams to centralize work, reduce status‑meeting overhead, and keep real‑time visibility into progress.",
     tags: [
-      {
-        name: "javascript",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "html",
-        color: "green-text-gradient",
-      },
-      {
-        name: "css",
-        color: "pink-text-gradient",
-      },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "drag-drop", color: "pink-text-gradient" },
+      { name: "redux", color: "green-text-gradient" },
     ],
-    image: carsgame,
-    source_code_link: "https://github.com/rishabhkumar1211/TWOCARS-MASTER",
-  },
-  {
-    name: "Products",
-    description:
-      "Elevate your business with our high-performance MERN stack e-commerce platform. Featuring an intuitive admin panel, Stripe payment integration, cloud deployment.",
-    tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "node",
-        color: "green-text-gradient",
-      },
-      {
-        name: "mongo",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: ecomm,
-    source_code_link: "https://github.com/rishabhkumar1211/Ecommerce-Frontend",
+    image: flow,
+    source_code_link: "https://github.com/rishabhkumar1211/jira-clone",
   },
 ];
 
