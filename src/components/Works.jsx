@@ -24,9 +24,9 @@ const ProjectCard = ({
           scale: 1,
           speed: 450,
         }}
-        className="bg-black-100 rounded-2xl w-full sm:w-[360px] overflow-hidden border border-accent/20 hover:border-accent/60 transition-all duration-300 shadow-lg hover:shadow-accent/20"
+        className="bg-black-100 rounded-2xl w-full max-w-sm mx-auto overflow-hidden border border-accent/20 hover:border-accent/60 transition-all duration-300 shadow-lg hover:shadow-accent/20"
       >
-        <div className="relative w-full h-[200px] sm:h-[230px] overflow-hidden group">
+        <div className="relative w-full h-48 sm:h-52 lg:h-56 overflow-hidden group">
           <img
             src={image}
             alt="project_image"
@@ -39,7 +39,7 @@ const ProjectCard = ({
               href={source_code_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 sm:px-6 py-2 bg-accent text-white font-bold rounded-lg hover:bg-accent-light transition flex items-center gap-2 text-sm sm:text-base"
+              className="px-3 py-1.5 sm:px-4 sm:py-2 bg-accent text-white font-bold rounded-lg hover:bg-accent-light transition flex items-center gap-2 text-xs sm:text-sm"
             >
               <img
                 src={github}
@@ -53,10 +53,10 @@ const ProjectCard = ({
         </div>
 
         <div className="p-4 sm:p-6">
-          <h3 className="text-white font-extrabold md:text-[22px] sm:text-[18px] text-[16px] truncate">
+          <h3 className="text-white font-extrabold text-lg sm:text-xl lg:text-2xl truncate">
             {name}
           </h3>
-          <p className="mt-2 sm:mt-3 text-gray-400 md:text-[14px] sm:text-[13px] text-[12px] line-clamp-3 leading-relaxed">
+          <p className="mt-2 text-gray-400 text-sm sm:text-base line-clamp-3 leading-relaxed">
             {description}
           </p>
 
@@ -64,7 +64,7 @@ const ProjectCard = ({
             {tags.map((tag) => (
               <span
                 key={`${name}-${tag.name}`}
-                className={`md:text-[12px] sm:text-[11px] text-[10px] font-semibold px-2 sm:px-3 py-1 rounded-full ${tag.color} bg-gradient-to-r from-accent/10 to-blue-accent/10 border border-accent/30`}
+                className="text-xs sm:text-sm font-semibold px-2 sm:px-3 py-1 rounded-full bg-gradient-to-r from-accent/10 to-blue-accent/10 border border-accent/30 text-white"
               >
                 {tag.name}
               </span>
@@ -105,7 +105,7 @@ const Works = () => {
               {projects.length} featured projects
             </span>
           </div>
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
             {projects.length ? (
               projects.map((project, index) => (
                 <ProjectCard

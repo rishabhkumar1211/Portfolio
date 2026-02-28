@@ -98,11 +98,11 @@ const Experience = () => {
               in fast‑paced product environments.
             </p>
             <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-black-100/60 px-3 py-1 text-[11px] sm:text-[12px] text-gray-200">
-              <span className="h-2 w-2 rounded-full bg-accent" />
-              2 companies · 4+ years
+              <span className="h-2 w-2 rounded-full bg-accent" />2 companies ·
+              4+ years
             </span>
           </div>
-          <VerticalTimeline lineColor="#10b981" layout="2-columns">
+          <VerticalTimeline lineColor="#10b981">
             {experiences.map((experience, index) => (
               <motion.div
                 variants={fadeIn("right", "spring", index * 0.25, 0.75)}

@@ -3,8 +3,6 @@ import React, { Suspense, lazy, useEffect, useRef, useState } from "react";
 
 import { styles } from "../styles";
 
-// CanvasLoader not needed in this file, fallbacks use plain text/divs
-// lazy-load the component defined in canvas/Computers.jsx
 const ComputersCanvas = lazy(() =>
   import("./canvas/Computers").then((mod) => ({ default: mod.default })),
 );
@@ -15,32 +13,12 @@ const Hero = () => {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
-
-    const handleChange = () => {
-      if (!mediaQuery.matches) {
-        setShow3D(false);
-      }
-    };
-
-    handleChange();
-    mediaQuery.addEventListener("change", handleChange);
-
-    return () => {
-      mediaQuery.removeEventListener("change", handleChange);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
     if (!canvasWrapperRef.current) return;
-
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
 
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        if (entry && entry.isIntersecting && mediaQuery.matches) {
+        if (entry && entry.isIntersecting) {
           setShow3D(true);
         }
       },
@@ -153,7 +131,7 @@ const Hero = () => {
           ) : (
             <div className="w-full h-full flex items-center justify-center rounded-2xl border border-accent/20 bg-black-200/40">
               <p className="text-gray-400 text-xs sm:text-sm">
-                3D preview is available on larger screens
+                Loading 3D preview...
               </p>
             </div>
           )}
