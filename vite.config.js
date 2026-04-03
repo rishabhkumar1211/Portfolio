@@ -27,33 +27,4 @@ export default defineConfig({
       },
     },
   },
-  server: {
-    headers: {
-      // Add cache headers for better performance
-      "Cache-Control": "public, max-age=31536000, immutable",
-      "X-Content-Type-Options": "nosniff",
-    },
-    middlewares: [
-      {
-        apply: "serve",
-        handler(req, res, next) {
-          // Cache DRACO decoder files aggressively
-          if (req.url.includes("/draco/")) {
-            res.setHeader(
-              "Cache-Control",
-              "public, max-age=31536000, immutable",
-            );
-          }
-          // Cache GLB files
-          if (req.url.includes(".glb")) {
-            res.setHeader(
-              "Cache-Control",
-              "public, max-age=31536000, immutable",
-            );
-          }
-          next();
-        },
-      },
-    ],
-  },
 });
